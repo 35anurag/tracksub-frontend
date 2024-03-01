@@ -23,7 +23,7 @@ const Login = () => {
       const response = await axios.post("http://localhost:3001/auth/login", {
         username,
         password,
-      });
+      }, { withCredentials: true });
       setCookies("access_token", response.data.token);
       window.localStorage.setItem("userID", response.data.userID);
       window.localStorage.setItem("username", username);
@@ -49,7 +49,6 @@ const Login = () => {
               <span className="font-semibold opacity-100"> TrackSub's</span>.
               Get Started
             </p>
-            {/* <p>You can use demo account </p> */}
           </div>
           <div className="flex flex-col gap-5 mt-6">
             <input

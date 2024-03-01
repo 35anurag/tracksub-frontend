@@ -16,12 +16,13 @@
         await axios.post("http://localhost:3001/auth/register", {
           username,
           password,
-        });
+        }, { withCredentials: true });
         navigate("/login")
         setUsername("")
         setPassword("")
       } catch (error) {
         console.log(error);
+        // navigate("/login")
       }}
     };
 
