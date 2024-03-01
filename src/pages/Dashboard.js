@@ -23,7 +23,7 @@ const Dashboard = () => {
     const fetchSubs = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/subscription/dashboard"
+          "https://tracksub-backend.onrender.com/" //http://localhost:3001/subscription/dashboard
         );
         setSubDetail(response.data);
       } catch (error) {
