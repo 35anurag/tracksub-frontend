@@ -30,7 +30,7 @@ const AppDetail = ({ index, image,isToggleDetail }) => {
     event.preventDefault();
     try {
       await axios.post(
-        "https://tracksub-backend.onrender.com/", //http://localhost:3001/subscription/dashboard
+        "https://tracksub-backend.onrender.com", //http://localhost:3001/subscription/dashboard
         appDetail
       );
       setNotificationMessage("Subscription is added successfully!");
