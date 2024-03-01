@@ -20,7 +20,7 @@ const Login = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     if(username && password){try {
-      const response = await axios.post("https://tracksub-backend.onrender.com", {  //http://localhost:3001/auth/login
+      const response = await axios.post("https://tracksub-backend.onrender.com/auth/login", {  //http://localhost:3001/auth/login
         username,
         password,
       }, { withCredentials: true });
