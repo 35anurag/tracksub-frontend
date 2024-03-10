@@ -45,7 +45,7 @@ const DashboardTable = ({ subDetail, setSubDetail, totalAmount }) => {
             <th className="text-[18px] ml-[2rem] font-medium lg:text-[16px]">
               Streaming Service
             </th>
-            <th className="text-[18px] font-medium lg:text-[16px]">
+            <th className="text-[18px] pl-[3rem] font-medium lg:text-[16px]">
               Account
             </th>
             <th className="text-[18px] pl-[3rem] font-medium lg:text-[16px]">
@@ -74,10 +74,10 @@ const DashboardTable = ({ subDetail, setSubDetail, totalAmount }) => {
                       {gettingData(detail.appID)}
                     </p>
                   </td>
-                  <td className="pr-[2rem]">
+                  <td className="pr-[1rem]">
                     <p className="text-[15px] max-w-[1rem] pl-[3rem]">{detail.accName}</p>
                   </td>
-                  <td className="pr-[2rem]">
+                  <td className="pl-[3rem]">
                     <p className="max-w-[1rem] text-[15px] pl-[3rem]">{detail.amount}</p>
                   </td>
                   <td className="pr-[1rem]">

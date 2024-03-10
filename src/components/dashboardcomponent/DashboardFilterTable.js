@@ -82,22 +82,22 @@ const DashboardFilterTable = ({
                   />
                   <p className="text-[18px]">{filteredItem.name}</p>
                 </td>
-                <td className="pr-[2rem]">
+                <td className="pl-[1rem]">
                   <p className="text-[18px] max-w-[1rem] pl-[3rem]">
                     {detail.accName}
                   </p>
                 </td>
-                <td className="pr-[2rem]">
+                <td className="pl-[3rem]">
                   <p className="max-w-[1rem] text-[18px] pl-[3rem]">
                     {detail.amount}
                   </p>
                 </td>
-                <td className="pr-[2rem]">
+                <td className="pr-[1rem]">
                   <p className="w-[10rem] text-[18px] pl-[4rem]">
                     {date(detail.date)}
                   </p>
                 </td>
-                <td className="pr-[2rem] pl-[3rem]">
+                <td className=" pl-[5rem]">
                   <button
                     className="text-[25px]"
                     onClick={() => handleDel(detail._id)}
