@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { StreamingAppContext } from "../context/StreamingAppContext";
 
-const DashboardComp = () => {
+const DashboardSearch = () => {
 
   const { data, setFilterData } = useContext(StreamingAppContext);
 
@@ -18,8 +18,8 @@ const DashboardComp = () => {
   };
 
   return (
-      <div className="flex flex-col gap-1">
-        <label id="search" className="font-semibold text-lg">
+      <div className="flex flex-row lg:flex-col gap-1 justify-between">
+        <label id="search" className="font-medium lg:block hidden text-[16px] lg:font-semibold lg:text-lg">
           Search:
         </label>
         <input
@@ -33,4 +33,4 @@ const DashboardComp = () => {
   );
 };
 
-export default DashboardComp;
+export default DashboardSearch;

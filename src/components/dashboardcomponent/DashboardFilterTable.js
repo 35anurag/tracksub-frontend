@@ -1,32 +1,24 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { MdDelete } from "react-icons/md";
+import { getUserID } from "../../hook/userID";
 
-const DashboardFilterTable = ({ filterData, subDetail, setSubDetail,filterAmount, setFilterAmount }) => {
-
-  const gettingFilterAccName = (index) => {
-    const appAccName = subDetail.find((app) => app.appID === index);
-    return appAccName ? appAccName.accName : "";
-  };
-
-  const gettingFilterAmount = (index) => {
-    const appAccName = subDetail.find((app) => app.appID === index);
-    return appAccName ? appAccName.amount : "";
-  };
-
+const DashboardFilterTable = ({
+  filterData,
+  subDetail,
+  setSubDetail,
+  setFilterAmount,
+}) => {
+  const userID = getUserID();
   useEffect(() => {
     let total = 0;
     subDetail.forEach((detail) => {
-      const appAmount = gettingFilterAmount(detail.appID);
-      total += appAmount;
+      if (detail.userOwner === userID) {
+        total += detail.amount;
+      }
     });
     setFilterAmount(total);
-  }, [subDetail, setFilterAmount]);
-
-  const gettingFilterDate = (index) => {
-    const appAccName = subDetail.find((app) => app.appID === index);
-    return appAccName ? appAccName.date : "";
-  };
+  }, [subDetail, setFilterAmount, userID]);
 
   const date = (date) => {
     if (date) {
@@ -38,57 +30,86 @@ const DashboardFilterTable = ({ filterData, subDetail, setSubDetail,filterAmount
 
   const handleDel = (id) => {
     axios
-      .delete(`http://localhost:3001/subscription/dashboard/${id}`)
+      .delete(`https://tracksub-backend.onrender.com/subscription/dashboard/${id}`) //https://tracksub-backend.onrender.com/subscription/dashboard/${id} http://localhost:3001/subscription/dashboard/${id}
       .then(() => {
-        setSubDetail(
-          subDetail.filter((val) => {
-            return val._id !== id;
-          })
-        );
+        setSubDetail(subDetail.filter((val) => val._id !== id));
       });
   };
+
   return (
-    <div className="flex flex-col gap-8">
-      {filterData
-        .filter((filterItem) =>
-          subDetail.some((detail) => detail.appID === filterItem.id)
-        )
-        .map((filteredItem, id) => (
-          <div key={id}>
-            <div className="flex flex-row justify-start gap-[5rem] items-center border-b-2 border-gray-600	rounded hover:bg-[#4d9ab6] bg-blur-lg p-3">
-              <div className="flex flex-row items-center justify-start w-[168px] gap-2">
-                <img
-                  src={filteredItem.image}
-                  className="max-w-[4rem] h-auto"
-                  alt="appimage"
-                ></img>
-                <p className="text-[19px] max-w-[5rem] font-medium">
-                  {filteredItem.name}
-                </p>
-              </div>
-              <p className="w-[6rem]">
-                {gettingFilterAccName(filteredItem.id)}
-              </p>
-              <p className="w-[6rem]">{gettingFilterAmount(filteredItem.id)}</p>
-              <p className="w-[7rem]">
-                {date(gettingFilterDate(filteredItem.id))}
-              </p>
-              <button className="text-[25px] ml-9"
-                onClick={() =>
-                  subDetail.map((detail) => {
-                    if (filteredItem.id === detail.appID){
-                      handleDel(detail._id);
-                    }
-                  })
-                }
+    <div className="flex flex-col gap-8 overflow-x-auto max-w-[100%]">
+      <table>
+        <thead className="border-b-2 border-gray-600 rounded">
+          <tr>
+            <th className=" text-[20px] ml-[2rem] font-medium lg:text-[18px]">
+              Streaming Service
+            </th>
+            <th className=" text-[20px] pl-[3rem] font-medium lg:text-[18px]">
+              Account
+            </th>
+            <th className=" text-[20px] pl-[3rem] font-medium lg:text-[18px]">
+              Amount
+            </th>
+            <th className=" text-[20px] pl-[3rem] font-medium lg:text-[18px]">
+              Date
+            </th>
+            <th className="text-[20px] pl-[3rem] font-medium lg:text-[20px]">
+              Manage
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {filterData.map((filteredItem) => {
+            const filteredSubscriptions = subDetail.filter(
+              (detail) =>
+                detail.appID === filteredItem.id && detail.userOwner === userID
+            );
+
+            if (filteredSubscriptions.length === 0) {
+              return null;
+            }
+
+            return filteredSubscriptions.map((detail) => (
+              <tr
+                key={detail._id}
+                className="border-b-2 border-gray-600 rounded"
               >
-                <MdDelete />
-              </button>
-              {/* in this button i first map the subdetail and check the index of the
-            filtereditem and detail pass that id to delete that app  */}
-            </div>
-          </div>
-        ))}
+                <td className="flex flex-row items-center gap-1 w-[10rem] pr-[1rem] py-6">
+                  <img
+                    className="w-[4rem] h-auto"
+                    src={filteredItem.image}
+                    alt="appImage"
+                  />
+                  <p className="text-[18px]">{filteredItem.name}</p>
+                </td>
+                <td className="pr-[2rem]">
+                  <p className="text-[18px] max-w-[1rem] pl-[3rem]">
+                    {detail.accName}
+                  </p>
+                </td>
+                <td className="pr-[2rem]">
+                  <p className="max-w-[1rem] text-[18px] pl-[3rem]">
+                    {detail.amount}
+                  </p>
+                </td>
+                <td className="pr-[2rem]">
+                  <p className="w-[10rem] text-[18px] pl-[4rem]">
+                    {date(detail.date)}
+                  </p>
+                </td>
+                <td className="pr-[2rem] pl-[3rem]">
+                  <button
+                    className="text-[25px]"
+                    onClick={() => handleDel(detail._id)}
+                  >
+                    <MdDelete />
+                  </button>
+                </td>
+              </tr>
+            ));
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

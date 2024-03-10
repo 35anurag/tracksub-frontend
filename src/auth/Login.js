@@ -8,10 +8,12 @@ import { IoEyeOffOutline } from "react-icons/io5";
 
 const Login = () => {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passVisible, isPassVisible] = useState(false);
   const navigate = useNavigate();
   const [cookies, setCookies] = useCookies(["access_token"]);
+  const [error, setError] = useState("");
 
   const {
     setNotificationMessage,
@@ -19,18 +21,35 @@ const Login = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    if(username && password){try {
-      const response = await axios.post("https://tracksub-backend.onrender.com/auth/login", {  //http://localhost:3001/auth/login
+    if(username && email && password){try {
+      const response = await axios.post("https://tracksub-backend.onrender.com/auth/login", {  //"https://tracksub-backend.onrender.com/auth/login"http://localhost:3001/auth/login
         username,
+        email,
         password,
       }, { withCredentials: true });
+
+      if(response.data.message === "User Doesn't Exist"){
+        setError("User doesn't exit. Please register first")
+        return
+      }
+
+      if(response.data.message === "Username is incorrect"){
+        setError("Username is incorrect")
+        return
+      }
+
+      if(response.data.message === "Username or Password is incorrect"){
+        setError("Username or Password is incorrect")
+        return
+      }
+
       setCookies("access_token", response.data.token);
       window.localStorage.setItem("userID", response.data.userID);
       window.localStorage.setItem("username", username);
       setNotificationMessage("User is successfully loggedin!")
       navigate("/dashboard");
     } catch (error) {
-      console.log(error);
+      setError("Username or Password is incorrect");
     }}
   };
 
@@ -39,12 +58,12 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-[#4492ae] min-h-screen w-full font-secondary">
+    <div className="bg-[#4492ae] min-h-screen w-screen lg:ml-[15rem] font-secondary overflow-hidden">
       <div className="ml-[5rem] mr-[5rem] pt-[3rem] flex flex-col items-center gap-4 text-white mb-[3rem]">
         <form onSubmit={onSubmit} className="flex flex-col items-center">
           <div className="flex flex-col items-center">
-            <h1 className="text-[35px] font-bold">Welcome back!</h1>
-            <p className="text-[#ece8e1] opacity-80">
+            <h1 className="text-[30px] font-bold">Welcome back!</h1>
+            <p className="text-[#ece8e1] opacity-80 lg:text-[18px] text-[18px] text-center">
               Simplify your workflow and manage your subs with
               <span className="font-semibold opacity-100"> TrackSub's</span>.
               Get Started
@@ -58,7 +77,15 @@ const Login = () => {
               placeholder="Username"
               id="username"
               value={username}
-            ></input>
+            />
+            <input
+              onChange={(event) => setEmail(event.target.value)}
+              className="outline-none w-[20rem] px-[5px] py-[10px] pl-5 pr-5 rounded-3xl text-black bg-white bg-opacity-75"
+              type="text"
+              placeholder="Email"
+              id="email"
+              value={email}
+            />
 
             <div className="relative">
               {passVisible ? (
@@ -91,7 +118,11 @@ const Login = () => {
                   <IoEyeOffOutline className="text-[20px] opacity-50" />
                 )}
               </button>
+              {error && 
+              <p className="text-center mt-2 text-red-600 text-sm">{error}</p>
+               }
             </div>
+            
           </div>
           <div className="flex flex-col items-center my-[3rem] gap-5">
             <button

@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import AppDetail from "../components/AppDetail";
 import { StreamingAppContext } from "../context/StreamingAppContext";
 import { IoAddOutline } from "react-icons/io5";
-// import { Link } from "react-router-dom";
 
 const StreamingApp = () => {
   const [clicked, setClicked] = useState("");
@@ -35,28 +34,28 @@ const StreamingApp = () => {
     }
   };
   return (
-    <div className="bg-[#4492ae] min-h-screen w-full font-secondary relative">
-      <div className="ml-[5rem] mr-[5rem] pt-[3rem] flex flex-col gap-4 text-white mb-[3rem]">
-        <h1 className="text-[27px] font-semibold text-black capitalize">
+    <div className="bg-[#1d1d20] min-h-screen w-full lg:ml-[15rem] font-secondary relative">
+      <div className="ml-[2rem] mr-[2rem] pt-[1rem] md:mr-[3rem] md:pt-[2rem] gap-3 md:ml-[3rem] lg:ml-[5rem] lg:mr-[5rem] lg:pt-[3rem] flex flex-col lg:gap-4 text-white lg:mb-[3rem]">
+        <h1 className="text-[23px] md:text-[24px] lg:text-[25px] font-semibold text-white capitalize">
           Streaming Apps
         </h1>
-        <div className="flex flex-row gap-4 items-center">
+        <div className="flex flex-row gap-2 lg:gap-4 items-center">
           <input
             placeholder="Search"
             onChange={handleInput}
-            className="w-[47rem] p-2 pl-4 rounded-[20px] text-black outline-none"
+            className="w-[40rem] pl-2 p-1 md:p-1 lg:w-[47rem] lg:p-2 lg:pl-4 rounded-[20px] text-black outline-none"
           />
           <button
             onClick={handleSearch}
-            className="hover:bg-[#48749f] bg-[#025db9b5] w-auto p-2 pr-3 flex flex-row items-center gap-2 rounded-[20px] "
+            className="bg-[#48749f] hover:bg-[#025db9b5] w-auto p-1 lg:p-2 pr-2 flex flex-row items-center gap-1 lg:gap-1 rounded-[20px] "
           >
-            <IoAddOutline className="text-xl" />
-            <p>Search</p>
+            <IoAddOutline className="text-[15px] lg:text-xl" />
+            <p className="text-[13px] lg:text-[15px]">Search</p>
           </button>
         </div>
 
         {searchClicked && filterData.length >= 1 ? (
-          <div className="mt-8 grid grid-cols-4 gap-8 ">
+          <div className="mt-4 lg:mt-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
             {filterData.map((app) => (
               <div key={app.id}>
                 <div className="">
@@ -90,7 +89,7 @@ const StreamingApp = () => {
             ))}
           </div>
         ) : (
-          <div className="mt-8 grid grid-cols-4 gap-8 ">
+          <div className="mt-4 grid-cols-2 md:grid-cols-4 lg:mt-8 grid lg:grid-cols-4 gap-8 ">
             {data.map((app) => (
               <div key={app.id}>
                 <div className="">

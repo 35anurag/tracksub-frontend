@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div className='flex flex-row'>
       <Router>
-      <Navbar />
+      <Navbar/>
         <Routes>
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/streamingApp' element={<StreamingApp />} />

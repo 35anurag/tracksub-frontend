@@ -3,8 +3,9 @@ import { StreamingAppContext } from "../context/StreamingAppContext";
 import { Link } from "react-router-dom";
 import { IoAddOutline } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
-import DashboardComp from "../components/DashboardSearch";
+import DashboardSearch from "../components/DashboardSearch";
 import axios from "axios";
+import { getUserID } from "../hook/userID";
 import DashboardTable from "../components/dashboardcomponent/DashboardTable";
 import DashboardFilterTable from "../components/dashboardcomponent/DashboardFilterTable";
 
@@ -18,12 +19,13 @@ const Dashboard = () => {
     notificationMessage,
     setNotificationMessage,
   } = useContext(StreamingAppContext);
+  const userID = getUserID();
 
   useEffect(() => {
     const fetchSubs = async () => {
       try {
         const response = await axios.get(
-          "https://tracksub-backend.onrender.com/subscription/dashboard" //http://localhost:3001/subscription/dashboard
+          "https://tracksub-backend.onrender.com/subscription/dashboard" //"https://tracksub-backend.onrender.com/subscription/dashboard" http://localhost:3001/subscription/dashboard
         );
         setSubDetail(response.data);
       } catch (error) {
@@ -38,7 +40,7 @@ const Dashboard = () => {
       isVisible(false);
       setNotificationMessage("");
     }, 4000);
-    
+
     return () => {
       clearTimeout(timeout);
     };
@@ -52,7 +54,9 @@ const Dashboard = () => {
   const totalAmount = () => {
     let total = 0;
     subDetail.forEach((detail) => {
-      total += detail.amount;
+      if (detail.userOwner === userID) {
+        total += detail.amount;
+      }
     });
     return Intl.NumberFormat("en-US", {
       style: "currency",
@@ -61,35 +65,29 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="bg-[#4492ae] min-h-screen w-full font-secondary relative">
-      <div className="ml-[5rem] mr-[5rem] pt-[3rem] flex flex-col gap-4 text-white mb-[3rem]">
-        <h1 className="text-[27px] font-semibold text-black capitalize">
+    <div className="overflow-x-hidden bg-[#1d1d20] min-h-screen w-full lg:ml-[15rem] font-secondary relative ">
+      <div className="ml-[2rem] mr-[2rem] pt-[1rem] lg:ml-[5rem] lg:mr-[5rem] lg:pt-[3rem] flex flex-col gap-4 text-white mb-[3rem]">
+        <h1 className="text-[22px] lg:text-[25px] font-semibold text-white capitalize">
           Welcome {window.localStorage.getItem("username")}!
         </h1>
         <div className="flex flex-row justify-between items-center border-b-2 border-gray-600 pb-3">
-          <h1 className="text-[22px] font-medium text-black">Subscriptions</h1>
+          <h1 className="text-[18px] lg:text-[20px] font-semibold text-white">
+            Subscriptions
+          </h1>
           <Link
-            className="bg-[#025eb9] hover:bg-[#395b7c] p-2 rounded-lg text-sm flex flex-row items-center justify-center gap-2"
+            className="hover:bg-[#025eb9] bg-[#395b7c] p-2 rounded-lg lg:text-sm flex flex-row items-center justify-center gap-1 lg:gap-2"
             to="/streamingApp"
           >
-            <IoAddOutline className="text-xl " />
-            <p className="font-semibold">Add new subscription</p>
+            <IoAddOutline className="text-lg lg:text-[15px] " />
+            <p className="font-medium lg:font-semibold text-[11px] lg:text-[13px]">Add new subscription</p>
           </Link>
         </div>
 
-        <DashboardComp />
-
-        <div className="flex flex-row justify-between items-center border-b-2 border-gray-600	rounded pb-2 text-lg mt-[1rem]">
-          <p className="w-[11rem] text-[20px]">Streaming Service</p>
-          <p className="w-[7rem] text-[20px]">Account</p>
-          <p className="w-[7rem] text-[20px]">Amount</p>
-          <p className="w-[7rem] text-[20px]">Expiry</p>
-          <p className="text-[20px]">Manage</p>
-        </div>
+        <DashboardSearch />
 
         <div>
           {filterData.length === 0 ? (
-            <DashboardTable subDetail={subDetail} setSubDetail={setSubDetail} />
+            <DashboardTable subDetail={subDetail} setSubDetail={setSubDetail} totalAmount={totalAmount()} />
           ) : (
             <DashboardFilterTable
               filterData={filterData}
@@ -100,12 +98,6 @@ const Dashboard = () => {
             />
           )}
         </div>
-        {filterData.length === 0 && (
-          <div className="border-b-2 border-gray-600 rounded pb-2 flex flex-row items-center">
-            <p className="text-[18px] font-semibold">Total</p>
-            <div className="font-semibold ml-[398px]">{totalAmount()}</div>
-          </div>
-        )}
       </div>
 
       {notificationMessage && (

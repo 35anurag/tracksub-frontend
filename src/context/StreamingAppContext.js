@@ -8,6 +8,7 @@ const StreamingAppContextProvider = ({ children }) => {
   const [filterAmount, setFilterAmount] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [notificationMessage, setNotificationMessage] = useState("");
+  const [currentAccount, setCurrentAccount] = useState("")
   return (
     <StreamingAppContext.Provider
       value={{
@@ -17,7 +18,7 @@ const StreamingAppContextProvider = ({ children }) => {
         filterAmount,
         setFilterAmount,
         notificationMessage,
-        setNotificationMessage,
+        setNotificationMessage,currentAccount, setCurrentAccount,
       }}
     >
       {children}

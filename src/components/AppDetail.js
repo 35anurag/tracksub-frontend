@@ -30,7 +30,7 @@ const AppDetail = ({ index, image,isToggleDetail }) => {
     event.preventDefault();
     try {
       await axios.post(
-        "https://tracksub-backend.onrender.com/subscription/dashboard", //http://localhost:3001/subscription/dashboard
+        "https://tracksub-backend.onrender.com/subscription/dashboard", //"https://tracksub-backend.onrender.com/subscription/dashboard" http://localhost:3001/subscription/dashboard
         appDetail
       );
       setNotificationMessage("Subscription is added successfully!");
@@ -42,9 +42,9 @@ const AppDetail = ({ index, image,isToggleDetail }) => {
 
   return (
     <div className="w-full h-screen fixed bg-black">
-      <div className="ml-[5rem] mt-[3rem] max-w-[55rem]">
+      <div className="ml-[2rem] mt-[1rem] mr-[2rem] lg:ml-[5rem] lg:mt-[3rem] max-w-[55rem]">
         <div className="">
-          <h1 className="text-[27px] font-semibold capitalize border-b ">
+          <h1 className="text-[25px] md:text-[26px] lg:text-[27px] font-semibold capitalize border-b ">
             Add New Subscription
           </h1>
         </div>
@@ -52,7 +52,7 @@ const AppDetail = ({ index, image,isToggleDetail }) => {
         <button onClick={handleClose} className="absolute right-0 top-0 mr-[1rem] mt-[1rem]"><IoClose /></button>
           <form onSubmit={onSubmit} className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
-              <label htmlFor="accName" className="text-[20px] font-semibold">
+              <label htmlFor="accName" className="text-[18px] lg:text-[20px] font-semibold">
                 Account Name
               </label>
               <input
@@ -61,11 +61,11 @@ const AppDetail = ({ index, image,isToggleDetail }) => {
                 name="accName"
                 type="text"
                 id="accName"
-                className="w-[20rem] p-[8px] rounded-[10px] pl-4 text-black outline-none"
+                className="w-[17rem] p-[6px] lg:w-[20rem] lg:p-[8px] rounded-[10px] pl-4 text-black outline-none"
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="amount" className="text-[20px] font-semibold">
+              <label htmlFor="amount" className="text-[18px] lg:text-[20px] font-semibold">
                 Subscription Amount
               </label>
               <input
@@ -74,12 +74,12 @@ const AppDetail = ({ index, image,isToggleDetail }) => {
                 name="amount"
                 type="number"
                 id="amount"
-                className="w-[20rem] p-[8px] rounded-[10px] pl-4 text-black outline-none"
+                className="w-[17rem] p-[6px] lg:w-[20rem] lg:p-[8px] rounded-[10px] pl-4 text-black outline-none"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="expDate" className="text-[20px] font-semibold">
+              <label htmlFor="expDate" className="text-[18px] lg:text-[20px] font-semibold">
                 Expiry Date
               </label>
               <input
@@ -90,19 +90,19 @@ const AppDetail = ({ index, image,isToggleDetail }) => {
                 min="2010-01-01"
                 max="2050-12-31"
                 id="expDate"
-                className="w-[20rem] p-[8px] rounded-[10px] pl-4 text-black outline-none"
+                className="w-[17rem] p-[6px] lg:w-[20rem] lg:p-[8px] rounded-[10px] pl-4 text-black outline-none"
               />
             </div>
 
             <button
               type="submit"
-              className="bg-[#025eb9] w-[20rem] mt-[1rem] hover:bg-[#395b7c] p-2 rounded-lg text-sm flex flex-row items-center justify-center gap-2"
+              className="bg-[#025eb9] w-[17rem] lg:w-[20rem] mt-[1rem] hover:bg-[#395b7c] p-2 rounded-lg text-sm flex flex-row items-center justify-center gap-2"
             >
               Add Subscription
             </button>
           </form>
           <div>
-            <h1><img src={image} alt="serviceprovider" className="w-[15rem] h-[9rem]"/></h1>
+            <h1><img src={image} alt="serviceprovider" className="hidden md:block lg:block w-[15rem] h-[9rem]"/></h1>
           </div>
         </div>
       </div>

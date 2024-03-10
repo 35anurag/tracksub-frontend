@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     fontFamily:{
       primary: "'Lato', sans-serif",
-      secondary: "'Source Sans 3', sans-serif"
+      secondary: "poppins"
     },
     extend: {},
   },
