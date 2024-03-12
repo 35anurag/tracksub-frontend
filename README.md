@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+TrackSub is a full-stack website where users can store their subscriptions of different apps like Amazon Prime, Netflix, etc, with easier functionalities.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+📦 Tech Stack: React js, Tailwind CSS, MONGO DB, Express js, Nodejs, React icons.
 
-## Available Scripts
+👨‍🍳 Features: TrackSub users are required to login first with user authentication  to access this website. While registering the new user account it takes time because backend is hosted in Render. It uses MongoDB as a database where the details of Subscription Apps are stored. In the dashboard, there are the details of Apps with great UI. User can click on the Add Subscription button to move to the Streaming App page and can select their used app. The details like Account Number, Amount and End date of the subscription. After the subscription is added then it shows the notification bar where it notifies the added Apps. Users can delete the App when the subscription is finished. 
 
-In the project directory, you can run:
+💭 Process: First I started with brainstorming the functionalities as I was learning the basics of MERN. So, I came up with the idea of building this website where it covers all the basic parts of MERN. As a beginner, I got stuck on the Authentication Process of users with the help of documentation, YouTube and Chatgpt I fixed that and moved ahead. Frontend Part was not that challenging at first but when making a table for the details of the Apps I found it a bit hard to make Responsive as time goes I got the hang of it and other parts were good to go. I found it mostly challenging on Backend parts of course it's my first time doing it. I learned to create schemas and connecting with the routes. 
 
-### `npm start`
+✨ Improvement: This website is not good in mobile responsive, I tried to fix it but its not that good. I want to show the statistics of the added apps in a Piechart comparing its amount and Dark and Light mode features will also make the website good. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+🚦 Running the Project: 
+If someone tried to clone the project then make sure to change the link of the hosted link which I already added the comment in the code just need to change it. 
+The backend is hosted in the Render, link: https://tracksub-backend.onrender.com
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+📸 Images: 
+Login Page: 
+<img width="959" alt="image" src="https://github.com/35anurag/tracksub-frontend/assets/90600402/fb48db30-16c1-446c-a214-48e7f4962049">
 
-### `npm test`
+Dashboard: 
+<img width="959" alt="image" src="https://github.com/35anurag/tracksub-frontend/assets/90600402/0c1aa219-b109-4c40-a7a1-140bc0bb5999">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Streaming App: 
+<img width="959" alt="image" src="https://github.com/35anurag/tracksub-frontend/assets/90600402/d7e7dd29-722c-4019-ad1f-25eb230f8e17">
 
-### `npm run build`
+Adding App Detail: 
+<img width="779" alt="image" src="https://github.com/35anurag/tracksub-frontend/assets/90600402/38a87e09-877a-401b-8fb0-15c6860f2be2">
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
